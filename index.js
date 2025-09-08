@@ -83,15 +83,25 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // Global Loading Utilities
+    function showLoading() {
+        const globalLoading = document.getElementById('global-loading');
+        if (globalLoading) {
+            globalLoading.classList.remove('hidden');
+        }
+    }
+
+    function hideLoading() {
+        const globalLoading = document.getElementById('global-loading');
+        if (globalLoading) {
+            globalLoading.classList.add('hidden');
+        }
+    }
+
     // API Functions
     async function fetchCategories() {
-        const mobileLoadingSpinner = document.getElementById('mobile-categories-loading');
-        const desktopLoadingSpinner = document.getElementById('desktop-categories-loading');
-        
         try {
-            // Show loading spinners
-            if (mobileLoadingSpinner) mobileLoadingSpinner.style.display = 'flex';
-            if (desktopLoadingSpinner) desktopLoadingSpinner.style.display = 'flex';
+            showLoading();
 
             const response = await fetch('https://openapi.programming-hero.com/api/categories');
             
@@ -111,21 +121,13 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Error fetching categories:', error);
             loadFallbackCategories();
         } finally {
-            // Hide loading spinners
-            if (mobileLoadingSpinner) mobileLoadingSpinner.style.display = 'none';
-            if (desktopLoadingSpinner) desktopLoadingSpinner.style.display = 'none';
+            hideLoading();
         }
     }
 
     async function fetchAllPlants() {
-        const productsGrid = document.getElementById('products-grid');
-        const productsLoading = document.getElementById('products-loading');
-        const noProductsMessage = document.getElementById('no-products-message');
-        
         try {
-            // Show loading overlay
-            if (productsLoading) productsLoading.classList.remove('hidden');
-            if (noProductsMessage) noProductsMessage.classList.add('hidden');
+            showLoading();
 
             const response = await fetch('https://openapi.programming-hero.com/api/plants');
             
@@ -147,20 +149,13 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Error fetching plants:', error);
             displayErrorMessage('Failed to load plants. Please try again later.');
         } finally {
-            // Hide loading overlay
-            if (productsLoading) productsLoading.classList.add('hidden');
+            hideLoading();
         }
     }
 
     async function fetchPlantsByCategory(categoryId) {
-        const productsGrid = document.getElementById('products-grid');
-        const productsLoading = document.getElementById('products-loading');
-        const noProductsMessage = document.getElementById('no-products-message');
-        
         try {
-            // Show loading overlay
-            if (productsLoading) productsLoading.classList.remove('hidden');
-            if (noProductsMessage) noProductsMessage.classList.add('hidden');
+            showLoading();
 
             const response = await fetch(`https://openapi.programming-hero.com/api/category/${categoryId}`);
             
@@ -184,8 +179,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Error fetching plants by category:', error);
             displayErrorMessage('Failed to load plants for this category. Please try again later.');
         } finally {
-            // Hide loading overlay
-            if (productsLoading) productsLoading.classList.add('hidden');
+            hideLoading();
         }
     }
 

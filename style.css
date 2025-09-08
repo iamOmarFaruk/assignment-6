@@ -28,13 +28,6 @@ html {
 }
 
 /* Loading Spinner Styles */
-.loading-spinner {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 200px;
-}
-
 .spinner {
     width: 40px;
     height: 40px;
@@ -42,6 +35,7 @@ html {
     border-top: 4px solid #15803d;
     border-radius: 50%;
     animation: spin 1s linear infinite;
+    margin: auto;
 }
 
 @keyframes spin {
@@ -59,23 +53,15 @@ html {
     animation: spin 1s linear infinite;
 }
 
-/* Overlay loading for sections */
-.loading-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(255, 255, 255, 0.9);
+/* Global loading overlay - perfectly centered */
+#global-loading {
+    backdrop-filter: blur(2px);
     display: flex;
-    justify-content: center;
     align-items: center;
-    z-index: 10;
-    min-height: 300px;
-    border-radius: 1rem;
+    justify-content: center;
 }
 
-.loading-overlay.hidden {
+#global-loading.hidden {
     display: none;
 }
 
