@@ -3,6 +3,10 @@ body {
     font-family: 'Inter', sans-serif;
 }
 
+body {
+    padding-top: 68px; /* Adjust this value based on your header's height */
+}
+
 html {
     scroll-behavior: smooth;
 }
