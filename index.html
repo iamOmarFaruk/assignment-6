@@ -102,309 +102,189 @@
         <div class="mx-auto px-6">
             <h2 class="text-xl md:text-2xl xl:text-[32px] font-medium text-gray-800 text-center mb-8 md:mb-12">Choose Your Trees</h2>
             
-            <!-- Mobile/Tablet Layout -->
-            <div class="xl:hidden">
-                <!-- Mobile Categories Dropdown -->
-                <div class="mb-6">
-                    <div class="dropdown dropdown-end w-full">
-                        <div tabindex="0" role="button" class="btn bg-white border-gray-300 w-full justify-between text-left">
-                            <span id="selected-category">All Trees</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                            </svg>
-                        </div>
-                        <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-full mt-1 z-[1]">
-                            <li><a class="category-item active" data-category="all">All Trees</a></li>
-                            <li><a class="category-item" data-category="fruit">Fruit Trees</a></li>
-                            <li><a class="category-item" data-category="flowering">Flowering Trees</a></li>
-                            <li><a class="category-item" data-category="shade">Shade Trees</a></li>
-                            <li><a class="category-item" data-category="medicinal">Medicinal Trees</a></li>
-                            <li><a class="category-item" data-category="timber">Timber Trees</a></li>
-                            <li><a class="category-item" data-category="evergreen">Evergreen Trees</a></li>
-                            <li><a class="category-item" data-category="ornamental">Ornamental Plants</a></li>
-                            <li><a class="category-item" data-category="bamboo">Bamboo</a></li>
-                            <li><a class="category-item" data-category="climbers">Climbers</a></li>
-                            <li><a class="category-item" data-category="aquatic">Aquatic Plants</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Mobile Cart Section -->
-                <div class="bg-white p-4 rounded-2xl mb-6 shadow-sm">
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">Your Cart</h3>
-                    
-                    <div class="space-y-3 mb-4" id="mobile-cart-items">
-                        <!-- Cart Item 1 -->
-                        <div class="bg-[#EFFDF4] rounded-xl p-3 flex justify-between items-start">
-                            <div>
-                                <h4 class="font-semibold text-gray-800 text-sm">Mango Tree</h4>
-                                <p class="text-gray-500 text-sm">৳500 × 1</p>
+            <!-- Main Layout Container -->
+            <div class="flex flex-col xl:flex-row gap-6 xl:gap-8">
+                
+                <!-- Categories Section -->
+                <div class="xl:w-60 xl:flex-shrink-0">
+                    <!-- Mobile/Tablet Categories Dropdown -->
+                    <div class="xl:hidden mb-6">
+                        <div class="dropdown dropdown-end w-full">
+                            <div tabindex="0" role="button" class="btn bg-white border-gray-300 w-full justify-between text-left">
+                                <span id="selected-category">All Trees</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
                             </div>
-                            <button class="text-gray-400 hover:text-gray-600 text-lg">×</button>
-                        </div>
-                        <!-- Cart Item 2 -->
-                        <div class="bg-[#EFFDF4] rounded-xl p-3 flex justify-between items-start">
-                            <div>
-                                <h4 class="font-semibold text-gray-800 text-sm">Guava Tree</h4>
-                                <p class="text-gray-500 text-sm">৳500 × 1</p>
-                            </div>
-                            <button class="text-gray-400 hover:text-gray-600 text-lg">×</button>
+                            <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-full mt-1 z-[1]">
+                                <li><a class="category-item active" data-category="all">All Trees</a></li>
+                                <li><a class="category-item" data-category="fruit">Fruit Trees</a></li>
+                                <li><a class="category-item" data-category="flowering">Flowering Trees</a></li>
+                                <li><a class="category-item" data-category="shade">Shade Trees</a></li>
+                                <li><a class="category-item" data-category="medicinal">Medicinal Trees</a></li>
+                                <li><a class="category-item" data-category="timber">Timber Trees</a></li>
+                                <li><a class="category-item" data-category="evergreen">Evergreen Trees</a></li>
+                                <li><a class="category-item" data-category="ornamental">Ornamental Plants</a></li>
+                                <li><a class="category-item" data-category="bamboo">Bamboo</a></li>
+                                <li><a class="category-item" data-category="climbers">Climbers</a></li>
+                                <li><a class="category-item" data-category="aquatic">Aquatic Plants</a></li>
+                            </ul>
                         </div>
                     </div>
                     
-                    <hr class="border-gray-200 mb-3">
+                    <!-- Desktop Categories Sidebar -->
+                    <div class="hidden xl:block">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Categories</h3>
+                        <div class="space-y-2 category-sidebar">
+                            <div class="px-4 py-2 rounded cursor-pointer active-item category-item" data-category="all">All Trees</div>
+                            <div class="text-gray-600 px-4 py-2 hover:bg-[#15803D] hover:text-white cursor-pointer rounded category-item" data-category="fruit">Fruit Trees</div>
+                            <div class="text-gray-600 px-4 py-2 hover:bg-[#15803D] hover:text-white cursor-pointer rounded category-item" data-category="flowering">Flowering Trees</div>
+                            <div class="text-gray-600 px-4 py-2 hover:bg-[#15803D] hover:text-white cursor-pointer rounded category-item" data-category="shade">Shade Trees</div>
+                            <div class="text-gray-600 px-4 py-2 hover:bg-[#15803D] hover:text-white cursor-pointer rounded category-item" data-category="medicinal">Medicinal Trees</div>
+                            <div class="text-gray-600 px-4 py-2 hover:bg-[#15803D] hover:text-white cursor-pointer rounded category-item" data-category="timber">Timber Trees</div>
+                            <div class="text-gray-600 px-4 py-2 hover:bg-[#15803D] hover:text-white cursor-pointer rounded category-item" data-category="evergreen">Evergreen Trees</div>
+                            <div class="text-gray-600 px-4 py-2 hover:bg-[#15803D] hover:text-white cursor-pointer rounded category-item" data-category="ornamental">Ornamental Plants</div>
+                            <div class="text-gray-600 px-4 py-2 hover:bg-[#15803D] hover:text-white cursor-pointer rounded category-item" data-category="bamboo">Bamboo</div>
+                            <div class="text-gray-600 px-4 py-2 hover:bg-[#15803D] hover:text-white cursor-pointer rounded category-item" data-category="climbers">Climbers</div>
+                            <div class="text-gray-600 px-4 py-2 hover:bg-[#15803D] hover:text-white cursor-pointer rounded category-item" data-category="aquatic">Aquatic Plants</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content Area (Cart + Products) -->
+                <div class="flex-1 flex flex-col xl:flex-row gap-6 xl:gap-8">
                     
-                    <div class="flex justify-between items-center font-bold">
-                        <span class="text-gray-800">Total</span>
-                        <span class="text-gray-900">৳1000</span>
-                    </div>
-                </div>
-
-                <!-- Mobile Products Grid (1 column for mobile, 2 for tablet, 3 for large tablet/small desktop) -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mobile-products-grid">
-                    <!-- Product Card  start -->
-                    <div class="bg-white rounded-2xl p-4 shadow-sm product-card-mobile">
-                      <div class="mb-6 card-content cursor-pointer">
-                        <div class="bg-gray-100 h-48 rounded-xl mb-4">
-                            <img src="assets/about.png" alt="Mango Tree" class="w-full h-full object-cover rounded-xl">
-                        </div>
-                        <h4 class="font-bold text-lg text-gray-800 mb-2">Mango Tree</h4>
-                        <p class="text-sm text-gray-600 mb-4 card-description">A fast-growing tropical tree that produces delicious, juicy mangoes during summer.</p>
-                        </div>
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full">Fruit Tree</span>
-                            <span class="font-bold text-lg text-gray-800">৳500</span>
-                        </div>
-                        <button class="w-full bg-[#15803D] text-white py-3 rounded-full hover:bg-green-700 transition-colors">Add to Cart</button>
-                    </div>
-                    <!-- Product Card  end -->
-
-                    <!-- Product Card  start -->
-                    <div class="bg-white rounded-2xl p-4 shadow-sm product-card-mobile">
-                      <div class="mb-6 card-content cursor-pointer">
-                        <div class="bg-gray-100 h-48 rounded-xl mb-4">
-                          <img src="assets/about.png" alt="Mango Tree" class="w-full h-full object-cover rounded-xl">
-                        </div>
-                        <h4 class="font-bold text-lg text-gray-800 mb-2">Rose Tree</h4>
-                        <p class="text-sm text-gray-600 mb-4 card-description">Beautiful flowering tree with fragrant roses that bloom throughout the year.</p>
-                      </div>
-                      <div class="flex justify-between items-center mb-4">
-                        <span class="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full">Flowering Tree</span>
-                        <span class="font-bold text-lg text-gray-800">৳600</span>
-                      </div>
-                      <button class="w-full bg-[#15803D] text-white py-3 rounded-full hover:bg-green-700 transition-colors">Add to Cart</button>
-                    </div>
-                    <!-- Product Card  end -->
-
-                    <!-- Product Card  start -->
-                    <div class="bg-white rounded-2xl p-4 shadow-sm product-card-mobile">
-                      <div class="mb-6 card-content cursor-pointer">
-                        <div class="bg-gray-100 h-48 rounded-xl mb-4">
-                          <img src="assets/about.png" alt="Neem Tree" class="w-full h-full object-cover rounded-xl">
-                        </div>
-                        <h4 class="font-bold text-lg text-gray-800 mb-2">Neem Tree</h4>
-                        <p class="text-sm text-gray-600 mb-4 card-description">A medicinal tree known for its therapeutic properties and natural pest control.</p>
-                      </div>
-                      <div class="flex justify-between items-center mb-4">
-                        <span class="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full">Medicinal Tree</span>
-                        <span class="font-bold text-lg text-gray-800">৳450</span>
-                      </div>
-                      <button class="w-full bg-[#15803D] text-white py-3 rounded-full hover:bg-green-700 transition-colors">Add to Cart</button>
-                    </div>
-                    <!-- Product Card  end -->
-
-                    <!-- Product Card  start -->
-                    <div class="bg-white rounded-2xl p-4 shadow-sm product-card-mobile">
-                      <div class="mb-6 card-content cursor-pointer">
-                        <div class="bg-gray-100 h-48 rounded-xl mb-4">
-                          <img src="assets/about.png" alt="Banyan Tree" class="w-full h-full object-cover rounded-xl">
-                        </div>
-                        <h4 class="font-bold text-lg text-gray-800 mb-2">Banyan Tree</h4>
-                        <p class="text-sm text-gray-600 mb-4 card-description">Large shade tree perfect for creating natural canopies in open spaces.</p>
-                      </div>
-                      <div class="flex justify-between items-center mb-4">
-                        <span class="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full">Shade Tree</span>
-                        <span class="font-bold text-lg text-gray-800">৳800</span>
-                      </div>
-                      <button class="w-full bg-[#15803D] text-white py-3 rounded-full hover:bg-green-700 transition-colors">Add to Cart</button>
-                    </div>
-                    <!-- Product Card  end -->
-                </div>
-            </div>
-
-            <!-- Desktop Layout (1280px and above) -->
-            <div class="hidden xl:flex gap-8">
-                <!-- Categories Sidebar -->
-                <div class="w-60 flex-shrink-0">
-                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Categories</h3>
-                    <div class="space-y-2">
-                        <div class="px-4 py-2 rounded cursor-pointer active-item">All Trees</div>
-                        <div class="text-gray-600 px-4 py-2 hover:bg-[#15803D] hover:text-white cursor-pointer rounded">Fruit Trees</div>
-                        <div class="text-gray-600 px-4 py-2 hover:bg-[#15803D] hover:text-white cursor-pointer rounded">Flowering Trees</div>
-                        <div class="text-gray-600 px-4 py-2 hover:bg-[#15803D] hover:text-white cursor-pointer rounded">Shade Trees</div>
-                        <div class="text-gray-600 px-4 py-2 hover:bg-[#15803D] hover:text-white cursor-pointer rounded">Medicinal Trees</div>
-                        <div class="text-gray-600 px-4 py-2 hover:bg-[#15803D] hover:text-white cursor-pointer rounded">Timber Trees</div>
-                        <div class="text-gray-600 px-4 py-2 hover:bg-[#15803D] hover:text-white cursor-pointer rounded">Evergreen Trees</div>
-                        <div class="text-gray-600 px-4 py-2 hover:bg-[#15803D] hover:text-white cursor-pointer rounded">Ornamental Plants</div>
-                        <div class="text-gray-600 px-4 py-2 hover:bg-[#15803D] hover:text-white cursor-pointer rounded">Bamboo</div>
-                        <div class="text-gray-600 px-4 py-2 hover:bg-[#15803D] hover:text-white cursor-pointer rounded">Climbers</div>
-                        <div class="text-gray-600 px-4 py-2 hover:bg-[#15803D] hover:text-white cursor-pointer rounded">Aquatic Plants</div>
-                    </div>
-                </div>
-
-                <!-- Products Grid -->
-                <div class="flex-1">
-                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
-                        <!-- Product Card  start -->
-                        <div class="bg-white rounded-2xl p-4 shadow-sm">
-                          <div class="mb-8 card-content cursor-pointer">
-                            <div class="bg-gray-100 h-48 rounded-xl mb-4">
-                                <img src="assets/about.png" alt="Mango Tree" class="w-full h-full object-cover rounded-xl">
-                            </div>
-                            <h4 class="font-bold text-lg text-gray-800 mb-2">Mango Tree</h4>
-                            <p class="text-sm text-gray-600 mb-4 h-16">A fast-growing tropical tree that produces delicious, juicy mangoes during summer. Its dense green</p>
-                            </div>
-                            <div class="flex justify-between items-center mb-4">
-                                <span class="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full">Fruit Tree</span>
-                                <span class="font-bold text-lg text-gray-800">৳500</span>
-                            </div>
-                            <button class="w-full bg-[#15803D] text-white py-3 rounded-full  hover:bg-green-700 transition-colors">Add to Cart</button>
-                        </div>
-                        <!-- Product Card  end -->
-
-                        <!-- Product Card  start -->
-                        <div class="bg-white rounded-2xl p-4 shadow-sm">
-                          <div class="mb-8 card-content cursor-pointer">
-                            <div class="bg-gray-100 h-48 rounded-xl mb-4">
-                              <img src="assets/about.png" alt="Mango Tree" class="w-full h-full object-cover rounded-xl">
-                            </div>
-                            <h4 class="font-bold text-lg text-gray-800 mb-2">Mango Tree</h4>
-                            <p class="text-sm text-gray-600 mb-4 h-16">A fast-growing tropical tree that produces delicious, juicy mangoes
-                              during summer. Its dense green</p>
-                          </div>
-                          <div class="flex justify-between items-center mb-4">
-                            <span class="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full">Fruit Tree</span>
-                            <span class="font-bold text-lg text-gray-800">৳500</span>
-                          </div>
-                          <button class="w-full bg-[#15803D] text-white py-3 rounded-full  hover:bg-green-700 transition-colors">Add to
-                            Cart</button>
-                        </div>
-                        <!-- Product Card  end -->
-
-
-                        <!-- Product Card  start -->
-                        <div class="bg-white rounded-2xl p-4 shadow-sm">
-                          <div class="mb-8 card-content cursor-pointer">
-                            <div class="bg-gray-100 h-48 rounded-xl mb-4">
-                              <img src="assets/about.png" alt="Mango Tree" class="w-full h-full object-cover rounded-xl">
-                            </div>
-                            <h4 class="font-bold text-lg text-gray-800 mb-2">Mango Tree</h4>
-                            <p class="text-sm text-gray-600 mb-4 h-16">A fast-growing tropical tree that produces delicious, juicy mangoes
-                              during summer. Its dense green</p>
-                          </div>
-                          <div class="flex justify-between items-center mb-4">
-                            <span class="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full">Fruit Tree</span>
-                            <span class="font-bold text-lg text-gray-800">৳500</span>
-                          </div>
-                          <button class="w-full bg-[#15803D] text-white py-3 rounded-full  hover:bg-green-700 transition-colors">Add to
-                            Cart</button>
-                        </div>
-                        <!-- Product Card  end -->
-
-                        <!-- Product Card  start -->
-                        <div class="bg-white rounded-2xl p-4 shadow-sm">
-                          <div class="mb-8 card-content cursor-pointer">
-                            <div class="bg-gray-100 h-48 rounded-xl mb-4">
-                              <img src="assets/about.png" alt="Mango Tree" class="w-full h-full object-cover rounded-xl">
-                            </div>
-                            <h4 class="font-bold text-lg text-gray-800 mb-2">Mango Tree</h4>
-                            <p class="text-sm text-gray-600 mb-4 h-16">A fast-growing tropical tree that produces delicious, juicy mangoes
-                              during summer. Its dense green</p>
-                          </div>
-                          <div class="flex justify-between items-center mb-4">
-                            <span class="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full">Fruit Tree</span>
-                            <span class="font-bold text-lg text-gray-800">৳500</span>
-                          </div>
-                          <button class="w-full bg-[#15803D] text-white py-3 rounded-full  hover:bg-green-700 transition-colors">Add to
-                            Cart</button>
-                        </div>
-                        <!-- Product Card  end -->
-
-
-                        <!-- Product Card  start -->
-                        <div class="bg-white rounded-2xl p-4 shadow-sm">
-                          <div class="mb-8 card-content cursor-pointer">
-                            <div class="bg-gray-100 h-48 rounded-xl mb-4">
-                              <img src="assets/about.png" alt="Mango Tree" class="w-full h-full object-cover rounded-xl">
-                            </div>
-                            <h4 class="font-bold text-lg text-gray-800 mb-2">Mango Tree</h4>
-                            <p class="text-sm text-gray-600 mb-4 h-16">A fast-growing tropical tree that produces delicious, juicy mangoes
-                              during summer. Its dense green</p>
-                          </div>
-                          <div class="flex justify-between items-center mb-4">
-                            <span class="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full">Fruit Tree</span>
-                            <span class="font-bold text-lg text-gray-800">৳500</span>
-                          </div>
-                          <button class="w-full bg-[#15803D] text-white py-3 rounded-full  hover:bg-green-700 transition-colors">Add to
-                            Cart</button>
-                        </div>
-                        <!-- Product Card  end -->
-
-                        <!-- Product Card  start -->
-                        <div class="bg-white rounded-2xl p-4 shadow-sm">
-                          <div class="mb-8 card-content cursor-pointer">
-                            <div class="bg-gray-100 h-48 rounded-xl mb-4">
-                              <img src="assets/about.png" alt="Mango Tree" class="w-full h-full object-cover rounded-xl">
-                            </div>
-                            <h4 class="font-bold text-lg text-gray-800 mb-2">Mango Tree</h4>
-                            <p class="text-sm text-gray-600 mb-4 h-16">A fast-growing tropical tree that produces delicious, juicy mangoes
-                              during summer. Its dense green</p>
-                          </div>
-                          <div class="flex justify-between items-center mb-4">
-                            <span class="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full">Fruit Tree</span>
-                            <span class="font-bold text-lg text-gray-800">৳500</span>
-                          </div>
-                          <button class="w-full bg-[#15803D] text-white py-3 rounded-full  hover:bg-green-700 transition-colors">Add to
-                            Cart</button>
-                        </div>
-                        <!-- Product Card  end -->
-
-                     
-
-                     
-
-                    </div>
-                </div>
-
-                <!-- Cart Sidebar -->
-                <div class="w-80 flex-shrink-0">
-                    <div class="bg-white p-6 rounded-2xl h-full">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Your Cart</h3>
-                        
-                        <div class="space-y-4 mb-6">
-                            <!-- Cart Item 1 -->
-                            <div class="bg-[#EFFDF4] rounded-xl p-4 flex justify-between items-start">
-                                <div>
-                                    <h4 class="font-semibold text-gray-800">Mango Tree</h4>
-                                    <p class="text-gray-500">৳500 × 1</p>
+                    <!-- Cart Section -->
+                    <div class="xl:order-2 xl:w-80 xl:flex-shrink-0">
+                        <div class="bg-white p-4 xl:p-6 rounded-2xl shadow-sm xl:h-full">
+                            <h3 class="text-xl xl:text-2xl font-bold text-gray-900 mb-4 xl:mb-6">Your Cart</h3>
+                            
+                            <div class="space-y-3 xl:space-y-4 mb-4 xl:mb-6" id="cart-items">
+                                <!-- Cart Item 1 -->
+                                <div class="bg-[#EFFDF4] rounded-xl p-3 xl:p-4 flex justify-between items-start">
+                                    <div>
+                                        <h4 class="font-semibold text-gray-800 text-sm xl:text-base">Mango Tree</h4>
+                                        <p class="text-gray-500 text-sm">৳500 × 1</p>
+                                    </div>
+                                    <button class="text-gray-400 hover:text-gray-600 text-lg xl:text-xl">×</button>
                                 </div>
-                                <button class="text-gray-400 hover:text-gray-600 text-xl">×</button>
+                                <!-- Cart Item 2 -->
+                                <div class="bg-[#EFFDF4] rounded-xl p-3 xl:p-4 flex justify-between items-start">
+                                    <div>
+                                        <h4 class="font-semibold text-gray-800 text-sm xl:text-base">Guava Tree</h4>
+                                        <p class="text-gray-500 text-sm">৳500 × 1</p>
+                                    </div>
+                                    <button class="text-gray-400 hover:text-gray-600 text-lg xl:text-xl">×</button>
+                                </div>
                             </div>
-                              <!-- Cart Item 2 -->
-                              <div class="bg-[#EFFDF4] rounded-xl p-4 flex justify-between items-start">
-                                  <div>
-                                      <h4 class="font-semibold text-gray-800">Guava Tree</h4>
-                                      <p class="text-gray-500">৳500 × 1</p>
-                                  </div>
-                                  <button class="text-gray-400 hover:text-gray-600 text-xl">×</button>
-                              </div>
+                            
+                            <hr class="border-gray-200 mb-3 xl:mb-4">
+                            
+                            <div class="flex justify-between items-center font-bold text-base xl:text-lg">
+                                <span class="text-gray-800">Total</span>
+                                <span class="text-gray-900" id="cart-total">৳1000</span>
+                            </div>
                         </div>
-                        
-                        <hr class="border-gray-200 mb-4">
-                        
-                        <div class="flex justify-between items-center font-bold text-lg">
-                            <span class="text-gray-800">Total</span>
-                            <span class="text-gray-900">৳1000</span>
+                    </div>
+
+                    <!-- Products Grid -->
+                    <div class="xl:order-1 flex-1">
+                        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 xl:gap-3" id="products-grid">
+                            <!-- Product Card 1 - Mango Tree -->
+                            <div class="bg-white rounded-2xl p-4 shadow-sm product-card" data-category="fruit">
+                                <div class="mb-6 xl:mb-8 card-content cursor-pointer">
+                                    <div class="bg-gray-100 h-48 rounded-xl mb-4">
+                                        <img src="assets/about.png" alt="Mango Tree" class="w-full h-full object-cover rounded-xl">
+                                    </div>
+                                    <h4 class="font-bold text-lg text-gray-800 mb-2">Mango Tree</h4>
+                                    <p class="text-sm text-gray-600 mb-4 xl:h-16 card-description">A fast-growing tropical tree that produces delicious, juicy mangoes during summer. Its dense green</p>
+                                </div>
+                                <div class="flex justify-between items-center mb-4">
+                                    <span class="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full">Fruit Tree</span>
+                                    <span class="font-bold text-lg text-gray-800">৳500</span>
+                                </div>
+                                <button class="w-full bg-[#15803D] text-white py-3 rounded-full hover:bg-green-700 transition-colors add-to-cart-btn">Add to Cart</button>
+                            </div>
+
+                            <!-- Product Card 2 - Rose Tree -->
+                            <div class="bg-white rounded-2xl p-4 shadow-sm product-card" data-category="flowering">
+                                <div class="mb-6 xl:mb-8 card-content cursor-pointer">
+                                    <div class="bg-gray-100 h-48 rounded-xl mb-4">
+                                        <img src="assets/about.png" alt="Rose Tree" class="w-full h-full object-cover rounded-xl">
+                                    </div>
+                                    <h4 class="font-bold text-lg text-gray-800 mb-2">Rose Tree</h4>
+                                    <p class="text-sm text-gray-600 mb-4 xl:h-16 card-description">Beautiful flowering tree with fragrant roses that bloom throughout the year.</p>
+                                </div>
+                                <div class="flex justify-between items-center mb-4">
+                                    <span class="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full">Flowering Tree</span>
+                                    <span class="font-bold text-lg text-gray-800">৳600</span>
+                                </div>
+                                <button class="w-full bg-[#15803D] text-white py-3 rounded-full hover:bg-green-700 transition-colors add-to-cart-btn">Add to Cart</button>
+                            </div>
+
+                            <!-- Product Card 3 - Neem Tree -->
+                            <div class="bg-white rounded-2xl p-4 shadow-sm product-card" data-category="medicinal">
+                                <div class="mb-6 xl:mb-8 card-content cursor-pointer">
+                                    <div class="bg-gray-100 h-48 rounded-xl mb-4">
+                                        <img src="assets/about.png" alt="Neem Tree" class="w-full h-full object-cover rounded-xl">
+                                    </div>
+                                    <h4 class="font-bold text-lg text-gray-800 mb-2">Neem Tree</h4>
+                                    <p class="text-sm text-gray-600 mb-4 xl:h-16 card-description">A medicinal tree known for its therapeutic properties and natural pest control.</p>
+                                </div>
+                                <div class="flex justify-between items-center mb-4">
+                                    <span class="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full">Medicinal Tree</span>
+                                    <span class="font-bold text-lg text-gray-800">৳450</span>
+                                </div>
+                                <button class="w-full bg-[#15803D] text-white py-3 rounded-full hover:bg-green-700 transition-colors add-to-cart-btn">Add to Cart</button>
+                            </div>
+
+                            <!-- Product Card 4 - Banyan Tree -->
+                            <div class="bg-white rounded-2xl p-4 shadow-sm product-card" data-category="shade">
+                                <div class="mb-6 xl:mb-8 card-content cursor-pointer">
+                                    <div class="bg-gray-100 h-48 rounded-xl mb-4">
+                                        <img src="assets/about.png" alt="Banyan Tree" class="w-full h-full object-cover rounded-xl">
+                                    </div>
+                                    <h4 class="font-bold text-lg text-gray-800 mb-2">Banyan Tree</h4>
+                                    <p class="text-sm text-gray-600 mb-4 xl:h-16 card-description">Large shade tree perfect for creating natural canopies in open spaces.</p>
+                                </div>
+                                <div class="flex justify-between items-center mb-4">
+                                    <span class="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full">Shade Tree</span>
+                                    <span class="font-bold text-lg text-gray-800">৳800</span>
+                                </div>
+                                <button class="w-full bg-[#15803D] text-white py-3 rounded-full hover:bg-green-700 transition-colors add-to-cart-btn">Add to Cart</button>
+                            </div>
+
+                            <!-- Product Card 5 - Guava Tree -->
+                            <div class="bg-white rounded-2xl p-4 shadow-sm product-card" data-category="fruit">
+                                <div class="mb-6 xl:mb-8 card-content cursor-pointer">
+                                    <div class="bg-gray-100 h-48 rounded-xl mb-4">
+                                        <img src="assets/about.png" alt="Guava Tree" class="w-full h-full object-cover rounded-xl">
+                                    </div>
+                                    <h4 class="font-bold text-lg text-gray-800 mb-2">Guava Tree</h4>
+                                    <p class="text-sm text-gray-600 mb-4 xl:h-16 card-description">Tropical fruit tree that produces sweet and nutritious guavas rich in vitamin C.</p>
+                                </div>
+                                <div class="flex justify-between items-center mb-4">
+                                    <span class="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full">Fruit Tree</span>
+                                    <span class="font-bold text-lg text-gray-800">৳500</span>
+                                </div>
+                                <button class="w-full bg-[#15803D] text-white py-3 rounded-full hover:bg-green-700 transition-colors add-to-cart-btn">Add to Cart</button>
+                            </div>
+
+                            <!-- Product Card 6 - Teak Tree -->
+                            <div class="bg-white rounded-2xl p-4 shadow-sm product-card" data-category="timber">
+                                <div class="mb-6 xl:mb-8 card-content cursor-pointer">
+                                    <div class="bg-gray-100 h-48 rounded-xl mb-4">
+                                        <img src="assets/about.png" alt="Teak Tree" class="w-full h-full object-cover rounded-xl">
+                                    </div>
+                                    <h4 class="font-bold text-lg text-gray-800 mb-2">Teak Tree</h4>
+                                    <p class="text-sm text-gray-600 mb-4 xl:h-16 card-description">Premium timber tree known for its durable and water-resistant hardwood.</p>
+                                </div>
+                                <div class="flex justify-between items-center mb-4">
+                                    <span class="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full">Timber Tree</span>
+                                    <span class="font-bold text-lg text-gray-800">৳750</span>
+                                </div>
+                                <button class="w-full bg-[#15803D] text-white py-3 rounded-full hover:bg-green-700 transition-colors add-to-cart-btn">Add to Cart</button>
+                            </div>
                         </div>
                     </div>
                 </div>

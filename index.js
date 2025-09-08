@@ -83,25 +83,62 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Category dropdown functionality for mobile/tablet
+    // Unified Category functionality
     const categoryItems = document.querySelectorAll('.category-item');
     const selectedCategory = document.getElementById('selected-category');
+    const productsGrid = document.getElementById('products-grid');
+    const productCards = document.querySelectorAll('.product-card');
     
-    if (categoryItems.length > 0 && selectedCategory) {
+    // Function to filter products based on category
+    function filterProducts(category) {
+        productCards.forEach(card => {
+            if (category === 'all' || card.getAttribute('data-category') === category) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    // Function to update active states
+    function updateActiveCategory(clickedItem, categoryText) {
+        // Remove active class from all items
+        categoryItems.forEach(cat => {
+            cat.classList.remove('active', 'active-item');
+            if (cat.closest('.category-sidebar')) {
+                cat.classList.add('text-gray-600');
+                cat.classList.remove('bg-[#15803D]', 'text-white');
+            }
+        });
+        
+        // Add active class to clicked item
+        clickedItem.classList.add('active');
+        if (clickedItem.closest('.category-sidebar')) {
+            clickedItem.classList.add('active-item', 'bg-[#15803D]', 'text-white');
+            clickedItem.classList.remove('text-gray-600');
+        }
+        
+        // Update selected category text for mobile dropdown
+        if (selectedCategory) {
+            selectedCategory.textContent = categoryText;
+        }
+    }
+    
+    if (categoryItems.length > 0) {
         categoryItems.forEach(item => {
             item.addEventListener('click', function(e) {
                 e.preventDefault();
                 
-                // Remove active class from all items
-                categoryItems.forEach(cat => cat.classList.remove('active'));
+                const category = this.getAttribute('data-category');
+                const categoryText = this.textContent.trim();
                 
-                // Add active class to clicked item
-                this.classList.add('active');
+                // Update active states
+                updateActiveCategory(this, categoryText);
                 
-                // Update selected category text
-                selectedCategory.textContent = this.textContent;
+                // Filter products
+                filterProducts(category);
                 
-                // Close dropdown by removing focus
+                // Close dropdown if it's a mobile dropdown item
                 const dropdown = this.closest('.dropdown');
                 if (dropdown) {
                     const button = dropdown.querySelector('[role="button"]');
@@ -110,8 +147,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
                 
-                // Here you can add filtering logic based on the selected category
-                const category = this.getAttribute('data-category');
                 console.log('Selected category:', category);
             });
         });
