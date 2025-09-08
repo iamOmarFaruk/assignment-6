@@ -116,18 +116,12 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                                 </svg>
                             </div>
-                            <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-full mt-1 z-[1]">
-                                <li><a class="category-item active" data-category="all">All Trees</a></li>
-                                <li><a class="category-item" data-category="fruit">Fruit Trees</a></li>
-                                <li><a class="category-item" data-category="flowering">Flowering Trees</a></li>
-                                <li><a class="category-item" data-category="shade">Shade Trees</a></li>
-                                <li><a class="category-item" data-category="medicinal">Medicinal Trees</a></li>
-                                <li><a class="category-item" data-category="timber">Timber Trees</a></li>
-                                <li><a class="category-item" data-category="evergreen">Evergreen Trees</a></li>
-                                <li><a class="category-item" data-category="ornamental">Ornamental Plants</a></li>
-                                <li><a class="category-item" data-category="bamboo">Bamboo</a></li>
-                                <li><a class="category-item" data-category="climbers">Climbers</a></li>
-                                <li><a class="category-item" data-category="aquatic">Aquatic Plants</a></li>
+                            <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-full mt-1 z-[1]" id="mobile-categories-dropdown">
+                                <!-- Loading spinner for mobile dropdown -->
+                                <div class="loading-spinner" id="mobile-categories-loading">
+                                    <div class="spinner"></div>
+                                </div>
+                                <!-- Categories will be loaded dynamically here -->
                             </ul>
                         </div>
                     </div>
@@ -135,18 +129,12 @@
                     <!-- Desktop Categories Sidebar -->
                     <div class="hidden xl:block">
                         <h3 class="text-lg font-semibold text-gray-800 mb-4">Categories</h3>
-                        <div class="space-y-2 category-sidebar">
-                            <div class="px-4 py-2 rounded cursor-pointer active-item category-item" data-category="all">All Trees</div>
-                            <div class="text-gray-600 px-4 py-2 hover:bg-[#15803D] hover:text-white cursor-pointer rounded category-item" data-category="fruit">Fruit Trees</div>
-                            <div class="text-gray-600 px-4 py-2 hover:bg-[#15803D] hover:text-white cursor-pointer rounded category-item" data-category="flowering">Flowering Trees</div>
-                            <div class="text-gray-600 px-4 py-2 hover:bg-[#15803D] hover:text-white cursor-pointer rounded category-item" data-category="shade">Shade Trees</div>
-                            <div class="text-gray-600 px-4 py-2 hover:bg-[#15803D] hover:text-white cursor-pointer rounded category-item" data-category="medicinal">Medicinal Trees</div>
-                            <div class="text-gray-600 px-4 py-2 hover:bg-[#15803D] hover:text-white cursor-pointer rounded category-item" data-category="timber">Timber Trees</div>
-                            <div class="text-gray-600 px-4 py-2 hover:bg-[#15803D] hover:text-white cursor-pointer rounded category-item" data-category="evergreen">Evergreen Trees</div>
-                            <div class="text-gray-600 px-4 py-2 hover:bg-[#15803D] hover:text-white cursor-pointer rounded category-item" data-category="ornamental">Ornamental Plants</div>
-                            <div class="text-gray-600 px-4 py-2 hover:bg-[#15803D] hover:text-white cursor-pointer rounded category-item" data-category="bamboo">Bamboo</div>
-                            <div class="text-gray-600 px-4 py-2 hover:bg-[#15803D] hover:text-white cursor-pointer rounded category-item" data-category="climbers">Climbers</div>
-                            <div class="text-gray-600 px-4 py-2 hover:bg-[#15803D] hover:text-white cursor-pointer rounded category-item" data-category="aquatic">Aquatic Plants</div>
+                        <div class="space-y-2 category-sidebar" id="desktop-categories">
+                            <!-- Loading spinner for desktop sidebar -->
+                            <div class="loading-spinner" id="desktop-categories-loading">
+                                <div class="spinner"></div>
+                            </div>
+                            <!-- Categories will be loaded dynamically here -->
                         </div>
                     </div>
                 </div>
