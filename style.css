@@ -136,8 +136,8 @@ html {
 
 /* Category dropdown styling */
 .category-item.active {
-    background-color: #15803D;
-    color: white;
+    background-color: #15803D !important;
+    color: white !important;
 }
 
 .category-item:hover {

@@ -789,13 +789,22 @@ document.addEventListener('DOMContentLoaded', function() {
                         fetchPlantsByCategory(categoryId);
                     }
                     
-                    // Close dropdown if it's a mobile dropdown item
+                    // Close mobile dropdown if this is from mobile dropdown
                     const dropdown = this.closest('.dropdown');
-                    if (dropdown) {
-                        const button = dropdown.querySelector('[role="button"]');
-                        if (button) {
-                            button.blur();
-                        }
+                    const isMobileDropdown = dropdown && dropdown.querySelector('#mobile-categories-dropdown');
+                    
+                    if (isMobileDropdown) {
+                        // Simple method - just blur the button to close DaisyUI dropdown
+                        setTimeout(() => {
+                            const button = dropdown.querySelector('[role="button"]');
+                            if (button) {
+                                button.blur();
+                                // Remove focus from any active element
+                                if (document.activeElement) {
+                                    document.activeElement.blur();
+                                }
+                            }
+                        }, 100);
                     }
                     
                     console.log('Selected category:', {
