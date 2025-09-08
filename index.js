@@ -480,40 +480,56 @@ document.addEventListener('DOMContentLoaded', function() {
         modalProductDetails.innerHTML = `
             <div class="relative">
                 <!-- Close button -->
-                <button class="absolute top-4 right-4 z-10 bg-white bg-opacity-90 hover:bg-opacity-100 w-10 h-10 rounded-full flex items-center justify-center text-gray-600 hover:text-gray-800 transition-colors shadow-lg" 
+                <button class="absolute top-3 right-3 md:top-4 md:right-4 z-10 bg-white bg-opacity-90 hover:bg-opacity-100 w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-gray-600 hover:text-gray-800 transition-colors shadow-lg" 
                         onclick="document.getElementById('product-modal').close()">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-5 md:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
 
                 <!-- Product Image -->
-                <div class="w-full h-64 md:h-80 bg-gray-100 relative overflow-hidden">
+                <div class="w-full h-48 sm:h-56 md:h-80 bg-gray-100 relative overflow-hidden">
                     <img src="${plant.image}" alt="${plant.name}" 
                          class="w-full h-full object-cover" 
                          onerror="this.src='assets/about.png';">
                 </div>
 
                 <!-- Product Info -->
-                <div class="p-6 md:p-8">
-                    <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
-                        <div class="flex-1">
-                            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">${plant.name}</h2>
-                            <span class="inline-block bg-green-100 text-green-800 text-sm font-semibold px-3 py-1 rounded-full">${plant.category}</span>
+                <div class="p-4 md:p-6 lg:p-8">
+                    <!-- Title, Category and Price - Mobile optimized -->
+                    <div class="mb-4 md:mb-6">
+                        <!-- Mobile: Title and Price on same line -->
+                        <div class="flex items-start justify-between gap-3 mb-2 sm:hidden">
+                            <div class="flex-1 min-w-0">
+                                <h2 class="text-lg font-bold text-gray-900 leading-tight">${plant.name}</h2>
+                            </div>
+                            <div class="text-right flex-shrink-0">
+                                <p class="text-xl font-bold text-gray-900">৳${plant.price}</p>
+                            </div>
                         </div>
-                        <div class="text-right">
-                            <p class="text-3xl font-bold text-gray-900">৳${plant.price}</p>
+                        
+                        <!-- Desktop: Original layout -->
+                        <div class="hidden sm:flex sm:flex-col md:flex-row md:items-start md:justify-between gap-4">
+                            <div class="flex-1">
+                                <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">${plant.name}</h2>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-3xl font-bold text-gray-900">৳${plant.price}</p>
+                            </div>
                         </div>
+                        
+                        <!-- Category badge -->
+                        <span class="inline-block bg-green-100 text-green-800 text-sm font-semibold px-3 py-1 rounded-full">${plant.category}</span>
                     </div>
 
                     <!-- Description -->
-                    <div class="mb-8">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-3">Description</h3>
-                        <p class="text-gray-600 leading-relaxed">${plant.description}</p>
+                    <div class="mb-6 md:mb-8">
+                        <h3 class="text-base md:text-lg font-semibold text-gray-900 mb-2 md:mb-3">Description</h3>
+                        <p class="text-sm md:text-base text-gray-600 leading-relaxed">${plant.description}</p>
                     </div>
 
                     <!-- Add to Cart Button -->
-                    <button class="w-full bg-[#15803D] text-white py-4 rounded-xl text-lg font-semibold hover:bg-green-700 transition-colors shadow-lg"
+                    <button class="w-full bg-[#15803D] text-white py-3 md:py-4 rounded-xl text-base md:text-lg font-semibold hover:bg-green-700 transition-colors shadow-lg"
                             onclick="addToCartFromModal(${plant.id}, '${plant.name}', ${plant.price}, '${plant.image}')">
                         Add to Cart
                     </button>
