@@ -3,6 +3,10 @@ body {
     font-family: 'Inter', sans-serif;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 .active-item {
     background-color: #15803D;
     color: white;
