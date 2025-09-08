@@ -27,7 +27,7 @@
                 </div>
                 <div class="navbar-end">
                     <!-- Desktop Menu -->
-                    <nav class="hidden md:flex space-x-8 items-center">
+                    <nav class="hidden lg:flex space-x-8 items-center">
                         <a href="#about" class="font-medium hover:text-green-200 transition-colors">About</a>
                         <a href="#" class="font-medium hover:text-green-200 transition-colors">Gallery</a>
                         <a href="#plant-a-tree" class="font-medium hover:text-green-200 transition-colors">Plant a Tree</a>
@@ -36,15 +36,29 @@
                         </a>
                     </nav>
                     <!-- Mobile Menu -->
-                    <div class="dropdown dropdown-end md:hidden">
-                        <label tabindex="0" class="btn btn-ghost btn-circle">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
-                        </label>
-                        <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-gray-800">
-                            <li><a href="#about">About</a></li>
-                            <li><a href="#">Gallery</a></li>
-                            <li><a href="#plant-a-tree">Plant a Tree</a></li>
-                        </ul>
+                    <div class="lg:hidden flex items-center space-x-4">
+                        <!-- Mobile CTA Button -->
+                        <a href="#plant-a-tree" class="bg-[#FACC15] text-green-800 px-4 py-1.5 rounded-full text-sm font-medium hover:bg-yellow-300 transition-colors">
+                            Plant Now
+                        </a>
+                        <!-- Mobile Menu Toggle -->
+                        <div class="dropdown dropdown-end">
+                            <label tabindex="0" class="btn btn-ghost btn-circle" id="mobile-menu-toggle">
+                                <!-- Hamburger Icon -->
+                                <svg id="hamburger-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+                                </svg>
+                                <!-- X Icon (hidden by default) -->
+                                <svg id="x-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </label>
+                            <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-gray-800" id="mobile-dropdown">
+                                <li><a href="#about">About</a></li>
+                                <li><a href="#">Gallery</a></li>
+                                <li><a href="#plant-a-tree">Plant a Tree</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
