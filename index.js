@@ -368,6 +368,10 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (!cartItemsContainer || !cartTotalElement) return;
 
+        // Get the cart total section elements
+        const cartTotalSection = cartTotalElement.closest('.flex');
+        const cartHr = cartTotalSection ? cartTotalSection.previousElementSibling : null;
+
         // Clear current cart display
         cartItemsContainer.innerHTML = '';
         
@@ -377,8 +381,23 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p class="text-sm">Your cart is empty</p>
                 </div>
             `;
-            cartTotalElement.textContent = '৳0';
+            
+            // Hide total section and hr when cart is empty
+            if (cartHr && cartHr.tagName === 'HR') {
+                cartHr.style.display = 'none';
+            }
+            if (cartTotalSection) {
+                cartTotalSection.style.display = 'none';
+            }
             return;
+        }
+
+        // Show total section and hr when cart has items
+        if (cartHr && cartHr.tagName === 'HR') {
+            cartHr.style.display = 'block';
+        }
+        if (cartTotalSection) {
+            cartTotalSection.style.display = 'flex';
         }
 
         // Display cart items
