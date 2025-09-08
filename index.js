@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Global Loading Utilities
+    // Global Loading Utilities (for categories only)
     function showLoading() {
         const globalLoading = document.getElementById('global-loading');
         if (globalLoading) {
@@ -95,6 +95,28 @@ document.addEventListener('DOMContentLoaded', function() {
         const globalLoading = document.getElementById('global-loading');
         if (globalLoading) {
             globalLoading.classList.add('hidden');
+        }
+    }
+
+    // Products Loading Utilities (localized overlay)
+    function showProductsLoading() {
+        const productsLoading = document.getElementById('products-loading-overlay');
+        const noProductsMessage = document.getElementById('no-products-message');
+        
+        if (productsLoading) {
+            productsLoading.classList.remove('hidden');
+            productsLoading.classList.add('show');
+        }
+        if (noProductsMessage) {
+            noProductsMessage.classList.add('hidden');
+        }
+    }
+
+    function hideProductsLoading() {
+        const productsLoading = document.getElementById('products-loading-overlay');
+        if (productsLoading) {
+            productsLoading.classList.add('hidden');
+            productsLoading.classList.remove('show');
         }
     }
 
@@ -127,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     async function fetchAllPlants() {
         try {
-            showLoading();
+            showProductsLoading();
 
             const response = await fetch('https://openapi.programming-hero.com/api/plants');
             
@@ -149,13 +171,13 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Error fetching plants:', error);
             displayErrorMessage('Failed to load plants. Please try again later.');
         } finally {
-            hideLoading();
+            hideProductsLoading();
         }
     }
 
     async function fetchPlantsByCategory(categoryId) {
         try {
-            showLoading();
+            showProductsLoading();
 
             const response = await fetch(`https://openapi.programming-hero.com/api/category/${categoryId}`);
             
@@ -179,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Error fetching plants by category:', error);
             displayErrorMessage('Failed to load plants for this category. Please try again later.');
         } finally {
-            hideLoading();
+            hideProductsLoading();
         }
     }
 

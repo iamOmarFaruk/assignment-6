@@ -169,10 +169,18 @@
 
                     <!-- Products Grid -->
                     <div class="xl:order-1 flex-1">
-                        <div class="relative">
+                        <div class="relative min-h-[400px]">
                             <!-- Products Grid Container -->
                             <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 xl:gap-3" id="products-grid">
                                 <!-- Products will be loaded dynamically here -->
+                            </div>
+                            
+                            <!-- Products Loading Overlay -->
+                            <div class="absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center rounded-2xl hidden" id="products-loading-overlay">
+                                <div class="text-center">
+                                    <div class="spinner mb-4"></div>
+                                    <p class="text-gray-600 font-medium">Loading plants...</p>
+                                </div>
                             </div>
                             
                             <!-- No Products Message -->

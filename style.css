@@ -53,7 +53,7 @@ html {
     animation: spin 1s linear infinite;
 }
 
-/* Global loading overlay - perfectly centered */
+/* Global loading overlay - for categories only */
 #global-loading {
     backdrop-filter: blur(2px);
     display: flex;
@@ -62,6 +62,22 @@ html {
 }
 
 #global-loading.hidden {
+    display: none;
+}
+
+/* Products loading overlay - localized to products container */
+#products-loading-overlay {
+    backdrop-filter: blur(1px);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #f3f4f6;
+    z-index: 20;
+}
+
+#products-loading-overlay.show {
+    display: flex !important;
+}
+
+#products-loading-overlay.hidden {
     display: none;
 }
 
