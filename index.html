@@ -280,6 +280,32 @@
         <div class="spinner"></div>
     </div>
 
+    <!-- Product Details Modal -->
+    <dialog id="product-modal" class="modal">
+        <div class="modal-box max-w-2xl p-0 bg-white rounded-2xl overflow-hidden">
+            <!-- Modal Content -->
+            <div id="modal-content">
+                <!-- Loading state -->
+                <div class="flex items-center justify-center py-12" id="modal-loading">
+                    <div class="spinner"></div>
+                </div>
+                
+                <!-- Product details content -->
+                <div id="modal-product-details" class="hidden">
+                    <!-- Content will be populated dynamically -->
+                </div>
+                
+                <!-- Error state -->
+                <div id="modal-error" class="hidden p-6 text-center">
+                    <p class="text-red-500 mb-4">Failed to load product details.</p>
+                    <button class="btn btn-primary" onclick="document.getElementById('product-modal').close()">Close</button>
+                </div>
+            </div>
+        </div>
+        <form method="dialog" class="modal-backdrop">
+            <button>close</button>
+        </form>
+    </dialog>
 
     
     <!-- JavaScript -->

@@ -240,3 +240,91 @@ html {
         min-height: 200px;
     }
 }
+
+/* Product Modal Styles */
+.modal {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.modal[open] {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+}
+
+.modal-box {
+    transform: translateY(20px);
+    transition: transform 0.3s ease-in-out;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal[open] .modal-box {
+    transform: translateY(0);
+}
+
+/* Modal close button hover effect */
+.modal-box .absolute button:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s ease-in-out;
+}
+
+/* Card content hover effect for modal trigger */
+.card-content {
+    transition: transform 0.2s ease-in-out;
+    border-radius: 0.75rem;
+}
+
+.card-content:hover {
+    transform: translateY(-2px);
+}
+
+.card-content:active {
+    transform: translateY(0);
+}
+
+/* Enhanced mobile modal styles */
+@media (max-width: 768px) {
+    .modal-box {
+        margin: 1rem;
+        max-width: calc(100vw - 2rem);
+        max-height: calc(100vh - 2rem);
+    }
+    
+    .modal-box .absolute button {
+        top: 0.75rem;
+        right: 0.75rem;
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+}
+
+/* Smooth scrolling for modal content */
+.modal-box {
+    scrollbar-width: thin;
+    scrollbar-color: #15803d #f1f5f9;
+}
+
+.modal-box::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-box::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 3px;
+}
+
+.modal-box::-webkit-scrollbar-thumb {
+    background: #15803d;
+    border-radius: 3px;
+}
+
+.modal-box::-webkit-scrollbar-thumb:hover {
+    background: #166534;
+}

@@ -238,7 +238,7 @@ document.addEventListener('DOMContentLoaded', function() {
             : plant.description;
 
         card.innerHTML = `
-            <div class="mb-6 xl:mb-8 card-content cursor-pointer">
+            <div class="mb-6 xl:mb-8 card-content cursor-pointer" data-plant-id="${plant.id}">
                 <div class="image-container mb-4">
                     <img src="${plant.image}" alt="${plant.name}" class="product-image" onerror="this.src='assets/about.png'; this.classList.add('loaded');">
                     <div class="image-loading-spinner">
@@ -276,6 +276,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 spinner.style.display = 'none';
             }
         }
+
+        // Add click event listener to card content for modal
+        const cardContent = card.querySelector('.card-content');
+        cardContent.addEventListener('click', function() {
+            const plantId = this.getAttribute('data-plant-id');
+            openProductModal(plantId);
+        });
 
         return card;
     }
@@ -441,6 +448,150 @@ document.addEventListener('DOMContentLoaded', function() {
     // Global functions
     window.addToCart = addToCart;
     window.removeFromCart = removeFromCart;
+
+    // Product Modal Functions
+    async function fetchPlantDetails(plantId) {
+        try {
+            const response = await fetch(`https://openapi.programming-hero.com/api/plant/${plantId}`);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            
+            if (data.status && data.plants) {
+                return data.plants;
+            } else {
+                throw new Error('Invalid plant data structure received');
+            }
+            
+        } catch (error) {
+            console.error('Error fetching plant details:', error);
+            throw error;
+        }
+    }
+
+    function displayProductModal(plant) {
+        const modalProductDetails = document.getElementById('modal-product-details');
+        
+        if (!modalProductDetails) return;
+
+        modalProductDetails.innerHTML = `
+            <div class="relative">
+                <!-- Close button -->
+                <button class="absolute top-4 right-4 z-10 bg-white bg-opacity-90 hover:bg-opacity-100 w-10 h-10 rounded-full flex items-center justify-center text-gray-600 hover:text-gray-800 transition-colors shadow-lg" 
+                        onclick="document.getElementById('product-modal').close()">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+
+                <!-- Product Image -->
+                <div class="w-full h-64 md:h-80 bg-gray-100 relative overflow-hidden">
+                    <img src="${plant.image}" alt="${plant.name}" 
+                         class="w-full h-full object-cover" 
+                         onerror="this.src='assets/about.png';">
+                </div>
+
+                <!-- Product Info -->
+                <div class="p-6 md:p-8">
+                    <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+                        <div class="flex-1">
+                            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">${plant.name}</h2>
+                            <span class="inline-block bg-green-100 text-green-800 text-sm font-semibold px-3 py-1 rounded-full">${plant.category}</span>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-3xl font-bold text-gray-900">৳${plant.price}</p>
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="mb-8">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-3">Description</h3>
+                        <p class="text-gray-600 leading-relaxed">${plant.description}</p>
+                    </div>
+
+                    <!-- Add to Cart Button -->
+                    <button class="w-full bg-[#15803D] text-white py-4 rounded-xl text-lg font-semibold hover:bg-green-700 transition-colors shadow-lg"
+                            onclick="addToCartFromModal(${plant.id}, '${plant.name}', ${plant.price}, '${plant.image}')">
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+
+    function showModalLoading() {
+        const modalLoading = document.getElementById('modal-loading');
+        const modalProductDetails = document.getElementById('modal-product-details');
+        const modalError = document.getElementById('modal-error');
+        
+        if (modalLoading) modalLoading.classList.remove('hidden');
+        if (modalProductDetails) modalProductDetails.classList.add('hidden');
+        if (modalError) modalError.classList.add('hidden');
+    }
+
+    function showModalContent() {
+        const modalLoading = document.getElementById('modal-loading');
+        const modalProductDetails = document.getElementById('modal-product-details');
+        const modalError = document.getElementById('modal-error');
+        
+        if (modalLoading) modalLoading.classList.add('hidden');
+        if (modalProductDetails) modalProductDetails.classList.remove('hidden');
+        if (modalError) modalError.classList.add('hidden');
+    }
+
+    function showModalError() {
+        const modalLoading = document.getElementById('modal-loading');
+        const modalProductDetails = document.getElementById('modal-product-details');
+        const modalError = document.getElementById('modal-error');
+        
+        if (modalLoading) modalLoading.classList.add('hidden');
+        if (modalProductDetails) modalProductDetails.classList.add('hidden');
+        if (modalError) modalError.classList.remove('hidden');
+    }
+
+    async function openProductModal(plantId) {
+        const modal = document.getElementById('product-modal');
+        
+        if (!modal) {
+            console.error('Product modal not found');
+            return;
+        }
+
+        // Show modal with loading state
+        showModalLoading();
+        modal.showModal();
+
+        try {
+            // Fetch plant details
+            const plantDetails = await fetchPlantDetails(plantId);
+            
+            // Display plant details in modal
+            displayProductModal(plantDetails);
+            showModalContent();
+            
+        } catch (error) {
+            console.error('Error loading plant details:', error);
+            showModalError();
+        }
+    }
+
+    function addToCartFromModal(id, name, price, image) {
+        // Add to cart
+        addToCart(id, name, price, image);
+        
+        // Close modal after adding
+        const modal = document.getElementById('product-modal');
+        if (modal) {
+            modal.close();
+        }
+    }
+
+    // Make functions globally available
+    window.openProductModal = openProductModal;
+    window.addToCartFromModal = addToCartFromModal;
 
     function loadCategories(categories) {
         const mobileDropdown = document.getElementById('mobile-categories-dropdown');
