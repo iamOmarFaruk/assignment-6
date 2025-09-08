@@ -117,6 +117,177 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    async function fetchAllPlants() {
+        const productsGrid = document.getElementById('products-grid');
+        const productsLoading = document.getElementById('products-loading');
+        const noProductsMessage = document.getElementById('no-products-message');
+        
+        try {
+            // Show loading overlay
+            if (productsLoading) productsLoading.classList.remove('hidden');
+            if (noProductsMessage) noProductsMessage.classList.add('hidden');
+
+            const response = await fetch('https://openapi.programming-hero.com/api/plants');
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            
+            if (data.status && data.plants) {
+                displayPlants(data.plants);
+                // Store plants data for filtering
+                window.allPlantsData = data.plants;
+            } else {
+                throw new Error('Invalid plants data structure received');
+            }
+            
+        } catch (error) {
+            console.error('Error fetching plants:', error);
+            displayErrorMessage('Failed to load plants. Please try again later.');
+        } finally {
+            // Hide loading overlay
+            if (productsLoading) productsLoading.classList.add('hidden');
+        }
+    }
+
+    async function fetchPlantsByCategory(categoryId) {
+        const productsGrid = document.getElementById('products-grid');
+        const productsLoading = document.getElementById('products-loading');
+        const noProductsMessage = document.getElementById('no-products-message');
+        
+        try {
+            // Show loading overlay
+            if (productsLoading) productsLoading.classList.remove('hidden');
+            if (noProductsMessage) noProductsMessage.classList.add('hidden');
+
+            const response = await fetch(`https://openapi.programming-hero.com/api/category/${categoryId}`);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            
+            if (data.status && data.plants) {
+                if (data.plants.length === 0) {
+                    showNoProductsMessage();
+                } else {
+                    displayPlants(data.plants);
+                }
+            } else {
+                throw new Error('Invalid category plants data structure received');
+            }
+            
+        } catch (error) {
+            console.error('Error fetching plants by category:', error);
+            displayErrorMessage('Failed to load plants for this category. Please try again later.');
+        } finally {
+            // Hide loading overlay
+            if (productsLoading) productsLoading.classList.add('hidden');
+        }
+    }
+
+    function displayPlants(plants) {
+        const productsGrid = document.getElementById('products-grid');
+        const noProductsMessage = document.getElementById('no-products-message');
+        
+        if (!productsGrid) {
+            console.error('Products grid not found');
+            return;
+        }
+
+        // Clear existing products
+        productsGrid.innerHTML = '';
+        
+        // Hide no products message
+        if (noProductsMessage) noProductsMessage.classList.add('hidden');
+
+        plants.forEach(plant => {
+            const plantCard = createPlantCard(plant);
+            productsGrid.appendChild(plantCard);
+        });
+    }
+
+    function createPlantCard(plant) {
+        const card = document.createElement('div');
+        card.className = 'bg-white rounded-2xl p-4 shadow-sm product-card';
+        card.setAttribute('data-category', getCategorySlug(plant.category));
+        card.setAttribute('data-plant-id', plant.id);
+        
+        // Truncate description if too long
+        const description = plant.description.length > 100 
+            ? plant.description.substring(0, 100) + '...' 
+            : plant.description;
+
+        card.innerHTML = `
+            <div class="mb-6 xl:mb-8 card-content cursor-pointer">
+                <div class="bg-gray-100 rounded-xl mb-4 overflow-hidden">
+                    <img src="${plant.image}" alt="${plant.name}" class="product-image" onerror="this.src='assets/about.png'">
+                </div>
+                <h4 class="font-bold text-lg text-gray-800 mb-2">${plant.name}</h4>
+                <p class="text-sm text-gray-600 mb-4 xl:h-16 card-description">${description}</p>
+            </div>
+            <div class="flex justify-between items-center mb-4">
+                <span class="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full">${plant.category}</span>
+                <span class="font-bold text-lg text-gray-800">৳${plant.price}</span>
+            </div>
+            <button class="w-full bg-[#15803D] text-white py-3 rounded-full hover:bg-green-700 transition-colors add-to-cart-btn" 
+                    onclick="addToCart(${plant.id}, '${plant.name}', ${plant.price}, '${plant.image}')">
+                Add to Cart
+            </button>
+        `;
+
+        return card;
+    }
+
+    function getCategorySlug(categoryName) {
+        return categoryName.toLowerCase()
+            .replace(/\s+/g, '-')
+            .replace(/[^\w-]/g, '')
+            .replace(/-tree$/i, '');
+    }
+
+    function showNoProductsMessage() {
+        const productsGrid = document.getElementById('products-grid');
+        const noProductsMessage = document.getElementById('no-products-message');
+        
+        if (productsGrid) productsGrid.innerHTML = '';
+        if (noProductsMessage) noProductsMessage.classList.remove('hidden');
+    }
+
+    function displayErrorMessage(message) {
+        const productsGrid = document.getElementById('products-grid');
+        if (productsGrid) {
+            productsGrid.innerHTML = `
+                <div class="col-span-full text-center py-12">
+                    <p class="text-red-500 text-lg mb-4">${message}</p>
+                    <button class="bg-[#15803D] text-white px-6 py-2 rounded-full hover:bg-green-700 transition-colors" 
+                            onclick="fetchAllPlants()">
+                        Try Again
+                    </button>
+                </div>
+            `;
+        }
+    }
+
+    // Global function to show all products
+    window.showAllProducts = function() {
+        // Reset to "All Trees" category
+        const allTreesItems = document.querySelectorAll('.category-item[data-category="all"]');
+        if (allTreesItems.length > 0) {
+            allTreesItems[0].click();
+        }
+    };
+
+    // Global function to add items to cart (placeholder for now)
+    window.addToCart = function(id, name, price, image) {
+        console.log('Adding to cart:', { id, name, price, image });
+        // TODO: Implement cart functionality
+        alert(`Added ${name} to cart for ৳${price}`);
+    };
+
     function loadCategories(categories) {
         const mobileDropdown = document.getElementById('mobile-categories-dropdown');
         const desktopCategories = document.getElementById('desktop-categories');
@@ -196,17 +367,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Category functionality functions
-    function filterProducts(category) {
-        const productCards = document.querySelectorAll('.product-card');
-        productCards.forEach(card => {
-            if (category === 'all' || card.getAttribute('data-category') === category) {
-                card.style.display = 'block';
-            } else {
-                card.style.display = 'none';
-            }
-        });
-    }
-
     function updateActiveCategory(clickedItem, categoryText) {
         const categoryItems = document.querySelectorAll('.category-item');
         
@@ -248,8 +408,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Update active states
                     updateActiveCategory(this, categoryText);
                     
-                    // Filter products
-                    filterProducts(category);
+                    // Fetch plants based on category
+                    if (category === 'all') {
+                        fetchAllPlants();
+                    } else {
+                        fetchPlantsByCategory(categoryId);
+                    }
                     
                     // Close dropdown if it's a mobile dropdown item
                     const dropdown = this.closest('.dropdown');
@@ -272,4 +436,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize the app
     fetchCategories();
+    fetchAllPlants(); // Load all plants initially
 });

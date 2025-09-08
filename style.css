@@ -66,15 +66,35 @@ html {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.9);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 10;
+    min-height: 300px;
+    border-radius: 1rem;
 }
 
 .loading-overlay.hidden {
     display: none;
+}
+
+/* Product card image styling */
+.product-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 0.75rem;
+}
+
+/* Product card hover effect */
+.product-card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.product-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 /* Mobile cart optimization */
@@ -105,5 +125,9 @@ html {
         -webkit-line-clamp: 2;
         line-clamp: 2;
         -webkit-box-orient: vertical;
+    }
+
+    .loading-overlay {
+        min-height: 200px;
     }
 }
