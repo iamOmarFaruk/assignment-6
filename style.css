@@ -11,6 +11,71 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Toast Notification Styles */
+.toast-notification {
+    position: fixed;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    min-width: 320px;
+    max-width: 500px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.toast-notification.success {
+    background: linear-gradient(135deg, #15803d 0%, #22c55e 100%);
+    color: white;
+}
+
+.toast-notification.error {
+    background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+    color: white;
+}
+
+.toast-notification.show {
+    top: 100px;
+    transform: translateX(-50%) scale(1);
+}
+
+.toast-content {
+    padding: 16px 20px;
+    text-align: center;
+}
+
+.toast-message {
+    font-size: 14px;
+    font-weight: 500;
+    display: block;
+}
+
+/* Add subtle animation effect */
+@keyframes slideIn {
+    from {
+        top: -100px;
+        opacity: 0;
+    }
+    to {
+        top: 100px;
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        top: 100px;
+        opacity: 1;
+    }
+    to {
+        top: -100px;
+        opacity: 0;
+    }
+}
+
 .active-item {
     background-color: #15803D;
     color: white;

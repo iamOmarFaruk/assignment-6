@@ -319,12 +319,128 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    // Global function to add items to cart (placeholder for now)
-    window.addToCart = function(id, name, price, image) {
-        console.log('Adding to cart:', { id, name, price, image });
-        // TODO: Implement cart functionality
-        alert(`Added ${name} to cart for ৳${price}`);
-    };
+    // Cart Management System
+    let cart = [];
+
+    // Toast Notification System
+    function showToast(message, type = 'success') {
+        const toast = document.createElement('div');
+        toast.className = `toast-notification ${type}`;
+        toast.innerHTML = `
+            <div class="toast-content">
+                <span class="toast-message">${message}</span>
+            </div>
+        `;
+        
+        document.body.appendChild(toast);
+        
+        // Trigger the slide down animation
+        setTimeout(() => {
+            toast.classList.add('show');
+        }, 10);
+        
+        // Auto remove after 3 seconds
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => {
+                if (toast.parentNode) {
+                    toast.parentNode.removeChild(toast);
+                }
+            }, 300);
+        }, 2000);
+    }
+
+    // Cart utility functions
+    function findCartItemIndex(id) {
+        return cart.findIndex(item => item.id === id);
+    }
+
+    function updateCartDisplay() {
+        const cartItemsContainer = document.getElementById('cart-items');
+        const cartTotalElement = document.getElementById('cart-total');
+        
+        if (!cartItemsContainer || !cartTotalElement) return;
+
+        // Clear current cart display
+        cartItemsContainer.innerHTML = '';
+        
+        if (cart.length === 0) {
+            cartItemsContainer.innerHTML = `
+                <div class="text-center py-8 text-gray-500">
+                    <p class="text-sm">Your cart is empty</p>
+                </div>
+            `;
+            cartTotalElement.textContent = '৳0';
+            return;
+        }
+
+        // Display cart items
+        cart.forEach(item => {
+            const cartItem = document.createElement('div');
+            cartItem.className = 'bg-[#EFFDF4] rounded-xl p-3 xl:p-4 flex justify-between items-start';
+            cartItem.innerHTML = `
+                <div class="flex-1">
+                    <h4 class="font-semibold text-gray-800 text-sm xl:text-base">${item.name}</h4>
+                    <p class="text-gray-500 text-sm">৳${item.price} × ${item.quantity}</p>
+                </div>
+                <button class="text-gray-400 hover:text-gray-600 text-lg xl:text-xl remove-from-cart" 
+                        data-id="${item.id}" title="Remove from cart">×</button>
+            `;
+            cartItemsContainer.appendChild(cartItem);
+        });
+
+        // Update total
+        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        cartTotalElement.textContent = `৳${total}`;
+
+        // Add event listeners to remove buttons
+        const removeButtons = cartItemsContainer.querySelectorAll('.remove-from-cart');
+        removeButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const itemId = parseInt(this.getAttribute('data-id'));
+                removeFromCart(itemId);
+            });
+        });
+    }
+
+    function addToCart(id, name, price, image) {
+        const existingItemIndex = findCartItemIndex(id);
+        
+        if (existingItemIndex !== -1) {
+            // Item exists, increment quantity
+            cart[existingItemIndex].quantity += 1;
+            showToast(`${name} quantity updated in cart`);
+        } else {
+            // New item, add to cart
+            cart.push({
+                id: id,
+                name: name,
+                price: price,
+                image: image,
+                quantity: 1
+            });
+            showToast(`${name} added to cart`);
+        }
+        
+        updateCartDisplay();
+        console.log('Cart updated:', cart);
+    }
+
+    function removeFromCart(id) {
+        const itemIndex = findCartItemIndex(id);
+        
+        if (itemIndex !== -1) {
+            const itemName = cart[itemIndex].name;
+            cart.splice(itemIndex, 1);
+            updateCartDisplay();
+            showToast(`${itemName} removed from cart`, 'error');
+            console.log('Item removed from cart:', itemName);
+        }
+    }
+
+    // Global functions
+    window.addToCart = addToCart;
+    window.removeFromCart = removeFromCart;
 
     function loadCategories(categories) {
         const mobileDropdown = document.getElementById('mobile-categories-dropdown');
@@ -473,6 +589,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Initialize the app
+    updateCartDisplay(); // Initialize cart display
     fetchCategories();
     fetchAllPlants(); // Load all plants initially
 });
