@@ -2,3 +2,8 @@
 body {
     font-family: 'Inter', sans-serif;
 }
+
+.active-item {
+    background-color: #15803D;
+    color: white;
+}
