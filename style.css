@@ -73,6 +73,48 @@ html {
     border-radius: 0.75rem;
 }
 
+/* Image loading container */
+.image-container {
+    position: relative;
+    background-color: #f3f4f6;
+    border-radius: 0.75rem;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Image loading spinner */
+.image-loading-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.image-loading-spinner .spinner-small {
+    border-color: #d1d5db;
+    border-top-color: #15803d;
+}
+
+/* Hide spinner when image is loaded */
+.product-image.loaded + .image-loading-spinner {
+    display: none;
+}
+
+.product-image {
+    transition: opacity 0.3s ease-in-out;
+}
+
+.product-image:not(.loaded) {
+    opacity: 0;
+}
+
+.product-image.loaded {
+    opacity: 1;
+}
+
 /* Product card hover effect */
 .product-card {
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;

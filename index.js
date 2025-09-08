@@ -217,8 +217,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         card.innerHTML = `
             <div class="mb-6 xl:mb-8 card-content cursor-pointer">
-                <div class="bg-gray-100 rounded-xl mb-4 overflow-hidden">
-                    <img src="${plant.image}" alt="${plant.name}" class="product-image" onerror="this.src='assets/about.png'">
+                <div class="image-container mb-4">
+                    <img src="${plant.image}" alt="${plant.name}" class="product-image" onerror="this.src='assets/about.png'; this.classList.add('loaded');">
+                    <div class="image-loading-spinner">
+                        <div class="spinner-small"></div>
+                    </div>
                 </div>
                 <h4 class="font-bold text-lg text-gray-800 mb-2">${plant.name}</h4>
                 <p class="text-sm text-gray-600 mb-4 xl:h-16 card-description">${description}</p>
@@ -232,6 +235,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 Add to Cart
             </button>
         `;
+
+        // Add image load event listener to hide spinner when image loads
+        const img = card.querySelector('.product-image');
+        const spinner = card.querySelector('.image-loading-spinner');
+        
+        img.addEventListener('load', function() {
+            this.classList.add('loaded');
+            if (spinner) {
+                spinner.style.display = 'none';
+            }
+        });
+
+        // Handle case where image is already cached
+        if (img.complete) {
+            img.classList.add('loaded');
+            if (spinner) {
+                spinner.style.display = 'none';
+            }
+        }
 
         return card;
     }
