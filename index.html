@@ -100,10 +100,10 @@
     <!-- Choose Your Trees Section -->
     <section class="bg-[#EFFDF4] py-16">
         <div class="mx-auto px-6">
-            <h2 class="text-[32px] font-medium text-gray-800 text-center mb-12">Choose Your Trees</h2>
+            <h2 class="text-xl md:text-2xl xl:text-[32px] font-medium text-gray-800 text-center mb-8 md:mb-12">Choose Your Trees</h2>
             
             <!-- Mobile/Tablet Layout -->
-            <div class="lg:hidden">
+            <div class="xl:hidden">
                 <!-- Mobile Categories Dropdown -->
                 <div class="mb-6">
                     <div class="dropdown dropdown-end w-full">
@@ -160,8 +160,8 @@
                     </div>
                 </div>
 
-                <!-- Mobile Products Grid (1 column for mobile, 2 for tablet) -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mobile-products-grid">
+                <!-- Mobile Products Grid (1 column for mobile, 2 for tablet, 3 for large tablet/small desktop) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mobile-products-grid">
                     <!-- Product Card  start -->
                     <div class="bg-white rounded-2xl p-4 shadow-sm product-card-mobile">
                       <div class="mb-6 card-content cursor-pointer">
@@ -232,8 +232,8 @@
                 </div>
             </div>
 
-            <!-- Desktop Layout (unchanged) -->
-            <div class="hidden lg:flex gap-8">
+            <!-- Desktop Layout (1280px and above) -->
+            <div class="hidden xl:flex gap-8">
                 <!-- Categories Sidebar -->
                 <div class="w-60 flex-shrink-0">
                     <h3 class="text-lg font-semibold text-gray-800 mb-4">Categories</h3>
@@ -254,7 +254,7 @@
 
                 <!-- Products Grid -->
                 <div class="flex-1">
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
                         <!-- Product Card  start -->
                         <div class="bg-white rounded-2xl p-4 shadow-sm">
                           <div class="mb-8 card-content cursor-pointer">
