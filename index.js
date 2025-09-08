@@ -330,7 +330,24 @@ document.addEventListener('DOMContentLoaded', function() {
     let cart = [];
 
     // Toast Notification System
+    let currentToast = null; // Track the current toast
+
     function showToast(message, type = 'success') {
+        // Remove existing toast immediately if one exists
+        if (currentToast) {
+            clearTimeout(currentToast.timeout);
+            if (currentToast.element && currentToast.element.parentNode) {
+                currentToast.element.classList.remove('show');
+                currentToast.element.classList.add('hide');
+                // Remove immediately without waiting for animation
+                setTimeout(() => {
+                    if (currentToast.element && currentToast.element.parentNode) {
+                        currentToast.element.parentNode.removeChild(currentToast.element);
+                    }
+                }, 50); // Very short delay
+            }
+        }
+
         const toast = document.createElement('div');
         toast.className = `toast-notification ${type}`;
         toast.innerHTML = `
@@ -341,20 +358,37 @@ document.addEventListener('DOMContentLoaded', function() {
         
         document.body.appendChild(toast);
         
-        // Trigger the slide down animation
-        setTimeout(() => {
-            toast.classList.add('show');
-        }, 10);
+        // Set current toast reference
+        currentToast = {
+            element: toast,
+            timeout: null
+        };
         
-        // Auto remove after 3 seconds
-        setTimeout(() => {
-            toast.classList.remove('show');
-            setTimeout(() => {
-                if (toast.parentNode) {
-                    toast.parentNode.removeChild(toast);
-                }
-            }, 300);
-        }, 2000);
+        // Force reflow to ensure initial state is rendered
+        toast.offsetHeight;
+        
+        // Trigger the slide down animation immediately
+        requestAnimationFrame(() => {
+            toast.classList.add('show');
+        });
+        
+        // Auto remove after 1.5 seconds
+        currentToast.timeout = setTimeout(() => {
+            if (currentToast && currentToast.element === toast) {
+                toast.classList.remove('show');
+                toast.classList.add('hide');
+                
+                setTimeout(() => {
+                    if (toast.parentNode) {
+                        toast.parentNode.removeChild(toast);
+                    }
+                    // Clear current toast reference if this was the active one
+                    if (currentToast && currentToast.element === toast) {
+                        currentToast = null;
+                    }
+                }, 300);
+            }
+        }, 1500);
     }
 
     // Cart utility functions

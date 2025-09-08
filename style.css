@@ -21,10 +21,12 @@ html {
     min-width: 320px;
     max-width: 500px;
     border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    backdrop-filter: blur(8px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px) scale(0.95);
 }
 
 .toast-notification.success {
@@ -39,7 +41,14 @@ html {
 
 .toast-notification.show {
     top: 100px;
-    transform: translateX(-50%) scale(1);
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+}
+
+.toast-notification.hide {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px) scale(0.95);
+    top: 80px;
 }
 
 .toast-content {
@@ -51,28 +60,72 @@ html {
     font-size: 14px;
     font-weight: 500;
     display: block;
+    line-height: 1.4;
 }
 
-/* Add subtle animation effect */
-@keyframes slideIn {
-    from {
-        top: -100px;
+/* Enhanced smooth animations */
+@keyframes slideInBounce {
+    0% {
         opacity: 0;
+        transform: translateX(-50%) translateY(-30px) scale(0.9);
     }
-    to {
-        top: 100px;
+    60% {
         opacity: 1;
+        transform: translateX(-50%) translateY(5px) scale(1.02);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0) scale(1);
     }
 }
 
-@keyframes slideOut {
-    from {
-        top: 100px;
+@keyframes slideOutSmooth {
+    0% {
         opacity: 1;
+        transform: translateX(-50%) translateY(0) scale(1);
     }
-    to {
-        top: -100px;
+    100% {
         opacity: 0;
+        transform: translateX(-50%) translateY(-20px) scale(0.95);
+    }
+}
+
+/* Apply animations for extra smoothness */
+.toast-notification.show {
+    animation: slideInBounce 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.toast-notification.hide {
+    animation: slideOutSmooth 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Prevent multiple toast overlap */
+.toast-notification + .toast-notification {
+    top: 160px;
+}
+
+/* Mobile responsive toast */
+@media (max-width: 640px) {
+    .toast-notification {
+        min-width: 280px;
+        max-width: calc(100vw - 2rem);
+        margin: 0 1rem;
+        left: 0;
+        right: 0;
+        transform: translateX(0);
+    }
+    
+    .toast-notification.show {
+        transform: translateX(0) translateY(0) scale(1);
+    }
+    
+    .toast-notification.hide {
+        transform: translateX(0) translateY(-20px) scale(0.95);
+    }
+    
+    .toast-notification.show {
+        animation: none;
+        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 }
 
