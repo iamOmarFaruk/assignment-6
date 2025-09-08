@@ -82,4 +82,38 @@ document.addEventListener('DOMContentLoaded', function() {
             closeMenu();
         }
     });
+
+    // Category dropdown functionality for mobile/tablet
+    const categoryItems = document.querySelectorAll('.category-item');
+    const selectedCategory = document.getElementById('selected-category');
+    
+    if (categoryItems.length > 0 && selectedCategory) {
+        categoryItems.forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all items
+                categoryItems.forEach(cat => cat.classList.remove('active'));
+                
+                // Add active class to clicked item
+                this.classList.add('active');
+                
+                // Update selected category text
+                selectedCategory.textContent = this.textContent;
+                
+                // Close dropdown by removing focus
+                const dropdown = this.closest('.dropdown');
+                if (dropdown) {
+                    const button = dropdown.querySelector('[role="button"]');
+                    if (button) {
+                        button.blur();
+                    }
+                }
+                
+                // Here you can add filtering logic based on the selected category
+                const category = this.getAttribute('data-category');
+                console.log('Selected category:', category);
+            });
+        });
+    }
 });
